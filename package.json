@@ -1,0 +1,43 @@
+{
+  "name": "virtual-credit-cards",
+  "main": "index.js",
+  "version": "0.0.0",
+  "description": "Credit card form components built with virtual-dom",
+  "license": "MIT",
+  "repository": "bendrucker/virtual-credit-cards",
+  "author": {
+    "name": "Ben Drucker",
+    "email": "bvdrucker@gmail.com",
+    "url": "bendrucker.me"
+  },
+  "scripts": {
+    "test": "standard && tape test.js",
+    "start": "degree"
+  },
+  "keywords": [
+    "credit",
+    "card",
+    "form",
+    "payment",
+    "virtual",
+    "dom",
+    "input",
+    "virtual-dom"
+  ],
+  "devDependencies": {
+    "degree": "~1.1.1",
+    "standard": "^7.0.0",
+    "tape": "^4.0.0"
+  },
+  "files": [
+    "*.js"
+  ],
+  "dependencies": {
+    "dover": "^1.2.0",
+    "numeric-pattern": "~1.0.0",
+    "observ": "~0.2.0",
+    "value-event": "^5.1.0",
+    "virtual-dom": "^2.1.0",
+    "zero-fill": "~2.2.3"
+  }
+}
