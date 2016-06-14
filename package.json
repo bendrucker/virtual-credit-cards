@@ -11,7 +11,7 @@
     "url": "bendrucker.me"
   },
   "scripts": {
-    "test": "standard && tape test.js",
+    "test": "standard && covert *.js",
     "start": "degree"
   },
   "keywords": [
@@ -25,14 +25,18 @@
     "virtual-dom"
   ],
   "devDependencies": {
+    "covert": "~1.1.0",
     "degree": "~1.1.1",
+    "dispatch-event": "~1.0.0",
     "standard": "^7.0.0",
-    "tape": "^4.0.0"
+    "tape": "^4.0.0",
+    "thermometer": "~1.4.0"
   },
   "files": [
     "*.js"
   ],
   "dependencies": {
+    "creditcards": "~2.1.2",
     "dover": "^1.2.0",
     "numeric-pattern": "~1.0.0",
     "observ": "~0.2.0",

@@ -7,7 +7,11 @@ var pad = require('zero-fill')(2)
 var h = require('virtual-dom/h')
 var numeric = require('numeric-pattern')
 var changeEvent = require('value-event/change')
+var expiration = require('creditcards/expiration')
 
+// MM / YY
+var MM_YY = /^\D*(\d{1,2})(\D+)?(\d{1,4})?/
+// Specific name helps autofill kick in
 var NAME = 'cc-exp'
 
 module.exports = ExpirationInput
@@ -17,7 +21,7 @@ function ExpirationInput (data) {
 
   return State({
     raw: Observ(data.raw || ''),
-    value: Observ(data.value || {}),
+    value: Observ(data.value || null),
     channels: {
       change: change
     }
@@ -25,7 +29,11 @@ function ExpirationInput (data) {
 }
 
 function change (state, data) {
-  state.raw.set(data[NAME])
+  var value = data[NAME]
+  state.set({
+    raw: value,
+    value: parse(value)
+  })
 }
 
 ExpirationInput.render = function render (state) {
@@ -40,14 +48,29 @@ ExpirationInput.render = function render (state) {
   })
 }
 
+function parse (raw) {
+  var parts = raw.match(MM_YY)
+  if (!parts) return null
+
+  var rawMonth = parts[1]
+  var rawYear = parts[3]
+
+  if (!rawYear || rawYear.length < 2) return null
+
+  return {
+    month: expiration.month.parse(rawMonth),
+    year: expiration.year.parse(rawYear, rawYear.length < 4)
+  }
+}
+
 function format (expiration) {
-  if (!expiration.month || !expiration.year) return
+  if (!expiration) return
   return [pad(expiration.month), String(expiration.year).substring(2, 4)].join(' / ')
 }
 
 function reformat (raw) {
   if (!raw) return ''
-  var parts = raw.match(/^\D*(\d{1,2})(\D+)?(\d{1,4})?/)
+  var parts = raw.match(MM_YY)
   if (!parts) return ''
 
   var month = parts[1] || ''
