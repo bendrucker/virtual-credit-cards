@@ -36,12 +36,15 @@
     "*.js"
   ],
   "dependencies": {
+    "ap": "~0.2.0",
     "creditcards": "~2.1.2",
     "dover": "^1.2.0",
     "numeric-pattern": "~1.0.0",
     "observ": "~0.2.0",
+    "observ-array": "~3.2.1",
     "observ-value": "~1.0.0",
     "value-event": "^5.1.0",
+    "value-pipe": "~1.0.0",
     "virtual-dom": "^2.1.0",
     "zero-fill": "~2.2.3"
   }
