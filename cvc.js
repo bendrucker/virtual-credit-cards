@@ -44,6 +44,7 @@ CardNumberInput.render = function render (state) {
     type: 'text',
     placeholder: 'CVC',
     pattern: numeric,
+    maxLength: 4,
     value: state.value,
     'ev-event': changeEvent(state.channels.change)
   })
