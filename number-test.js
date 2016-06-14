@@ -38,14 +38,12 @@ test('expiration', function (t) {
     })), 'valid with no types')
 
     t.ok(NumberInput.validate(NumberInput({
-      value: ['4242', '4242', '4242', '4242'].join(''),
-      types: ['Visa']
-    })), 'valid with matched type')
+      value: ['4242', '4242', '4242', '4242'].join('')
+    }), ['Visa']), 'valid with matched type')
 
     t.notOk(NumberInput.validate(NumberInput({
-      value: ['4242', '4242', '4242', '4242'].join(''),
-      types: ['American Express']
-    })), 'invalid with invalid type')
+      value: ['4242', '4242', '4242', '4242'].join('')
+    }), ['American Express']), 'invalid with invalid type')
 
     t.notOk(NumberInput.validate(NumberInput({
       value: ['442', '4242', '4242', '4242'].join('')

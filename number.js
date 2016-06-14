@@ -2,7 +2,6 @@
 
 var State = require('dover')
 var Observ = require('observ')
-var ObservArray = require('observ-array')
 var value = require('observ-value')
 var pipe = require('value-pipe')
 var partial = require('ap').partial
@@ -21,7 +20,6 @@ function CardNumberInput (data) {
 
   return State({
     value: Observ(data.value || ''),
-    types: ObservArray(data.types || []),
     channels: {
       change: change
     }
@@ -32,9 +30,9 @@ function change (state, data) {
   pipe(card.parse, state.value.set)(data[NAME])
 }
 
-CardNumberInput.validate = function validate (state) {
+CardNumberInput.validate = function validate (state, types) {
   var number = value(state.value)
-  var types = value(state.types)
+  types = types || []
   if (!types.length) return card.isValid(number)
   return types.some(partial(card.isValid, number))
 }

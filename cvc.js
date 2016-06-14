@@ -20,7 +20,6 @@ function CardNumberInput (data) {
 
   return State({
     value: Observ(data.value || ''),
-    type: Observ(data.type || null),
     channels: {
       change: change
     }
@@ -31,9 +30,8 @@ function change (state, data) {
   pipe(card.parse, state.value.set)(data[NAME])
 }
 
-CardNumberInput.validate = function validate (state) {
+CardNumberInput.validate = function validate (state, type) {
   var code = value(state.value)
-  var type = value(state.type)
   return cvc.isValid(code, type)
 }
 

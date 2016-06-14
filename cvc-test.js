@@ -36,19 +36,16 @@ test('cvc input', function (t) {
     })), 'invalid: 2 digit')
 
     t.notOk(Cvc.validate(Cvc({
-      value: '1234',
-      type: 'Visa'
-    })), 'invalid: 4 digit Visa')
+      value: '1234'
+    }), 'Visa'), 'invalid: 4 digit Visa')
 
     t.ok(Cvc.validate(Cvc({
-      value: '123',
-      type: 'Visa'
-    })), 'valid: 3 digit Visa')
+      value: '123'
+    }), 'Visa'), 'valid: 3 digit Visa')
 
     t.ok(Cvc.validate(Cvc({
-      value: '1234',
-      type: 'American Express'
-    })), 'valid: 4 digit Amex')
+      value: '1234'
+    }), 'American Express'), 'valid: 4 digit Amex')
 
     t.end()
   })
