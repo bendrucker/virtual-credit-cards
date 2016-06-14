@@ -28,7 +28,9 @@
     "covert": "~1.1.0",
     "degree": "~1.1.1",
     "dispatch-event": "~1.0.0",
+    "dom-walk": "~0.1.1",
     "observ-array": "~3.2.1",
+    "raf": "~2.0.4",
     "standard": "^7.0.0",
     "tape": "^4.0.0",
     "thermometer": "~1.4.0"
