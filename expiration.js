@@ -51,7 +51,7 @@ ExpirationInput.render = function render (state) {
     name: NAME,
     autofill: NAME,
     type: 'text',
-    placholder: 'MM / YY',
+    placeholder: 'MM / YY',
     pattern: numeric,
     value: format(state.value) || reformat(state.raw),
     'ev-event': changeEvent(state.channels.change)
