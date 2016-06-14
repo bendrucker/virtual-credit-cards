@@ -40,6 +40,7 @@
     "dover": "^1.2.0",
     "numeric-pattern": "~1.0.0",
     "observ": "~0.2.0",
+    "observ-value": "~1.0.0",
     "value-event": "^5.1.0",
     "virtual-dom": "^2.1.0",
     "zero-fill": "~2.2.3"

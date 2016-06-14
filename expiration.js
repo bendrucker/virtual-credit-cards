@@ -2,6 +2,7 @@
 
 var State = require('dover')
 var Observ = require('observ')
+var value = require('observ-value')
 var pad = require('zero-fill')(2)
 
 var h = require('virtual-dom/h')
@@ -34,6 +35,15 @@ function change (state, data) {
     raw: value,
     value: parse(value)
   })
+}
+
+ExpirationInput.validate = function validate (state) {
+  var data = value(state.value)
+
+  return Boolean(data) &&
+    expiration.month.isValid(data.month) &&
+    expiration.year.isValid(data.year) &&
+    !expiration.isPast(data.month, data.year)
 }
 
 ExpirationInput.render = function render (state) {

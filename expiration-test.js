@@ -50,4 +50,21 @@ test('expiration', function (t) {
       t.equal(state.value(), null, 'requires minimum 2 digit year')
     })
   })
+
+  t.test('validate', function (t) {
+    t.notOk(Expiration.validate(Expiration()), 'initially invalid')
+    t.notOk(Expiration.validate(Expiration({
+      value: {
+        month: 1,
+        year: 2016
+      }
+    })), 'invalid if past')
+    t.ok(Expiration.validate(Expiration({
+      value: {
+        month: 1,
+        year: 2050
+      }
+    })), 'valid if future')
+    t.end()
+  })
 })
