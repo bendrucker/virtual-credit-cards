@@ -49,7 +49,7 @@ ExpirationInput.validate = function validate (state) {
 ExpirationInput.render = function render (state) {
   return h('input', {
     name: NAME,
-    autocomplete: NAME,
+    autofill: NAME,
     type: 'text',
     placholder: 'MM / YY',
     pattern: numeric,
