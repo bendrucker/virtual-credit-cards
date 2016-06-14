@@ -6,6 +6,7 @@ var value = require('observ-value')
 var pad = require('zero-fill')(2)
 
 var h = require('virtual-dom/h')
+var extend = require('xtend')
 var numeric = require('numeric-pattern')
 var changeEvent = require('value-event/change')
 var expiration = require('creditcards/expiration')
@@ -46,8 +47,8 @@ ExpirationInput.validate = function validate (state) {
     !expiration.isPast(data.month, data.year)
 }
 
-ExpirationInput.render = function render (state) {
-  return h('input', {
+ExpirationInput.render = function render (state, options) {
+  return h('input', extend({
     name: NAME,
     autofill: NAME,
     type: 'text',
@@ -55,7 +56,7 @@ ExpirationInput.render = function render (state) {
     pattern: numeric,
     value: format(state.value) || reformat(state.raw),
     'ev-event': changeEvent(state.channels.change)
-  })
+  }, options))
 }
 
 function parse (raw) {

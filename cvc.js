@@ -7,6 +7,7 @@ var pipe = require('value-pipe')
 
 var h = require('virtual-dom/h')
 var changeEvent = require('value-event/change')
+var extend = require('xtend')
 var numeric = require('numeric-pattern')
 var card = require('creditcards/card')
 var cvc = require('creditcards/cvc')
@@ -35,8 +36,8 @@ CardNumberInput.validate = function validate (state, type) {
   return cvc.isValid(code, type)
 }
 
-CardNumberInput.render = function render (state) {
-  return h('input', {
+CardNumberInput.render = function render (state, options) {
+  return h('input', extend({
     name: NAME,
     autocomplete: NAME,
     type: 'text',
@@ -45,5 +46,5 @@ CardNumberInput.render = function render (state) {
     maxLength: 4,
     value: state.value,
     'ev-event': changeEvent(state.channels.change)
-  })
+  }, options))
 }

@@ -46,6 +46,7 @@
     "value-event": "^5.1.0",
     "value-pipe": "~1.0.0",
     "virtual-dom": "^2.1.0",
+    "xtend": "~4.0.1",
     "zero-fill": "~2.2.3"
   }
 }
