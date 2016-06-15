@@ -58,7 +58,7 @@ CreditCardForm.render = function render (state) {
     h('.row.small-12.columns', renderTypeControls(state)),
     h('.row.small-12.columns', [
       h('.callout', json.render({
-        types: Object.keys(state.types).filter(function (type) { state.types[type] }),
+        types: Object.keys(state.types).filter(function (type) { return state.types[type] }),
         number: {
           value: state.number.value,
           type: {
