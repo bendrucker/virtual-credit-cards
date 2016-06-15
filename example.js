@@ -42,7 +42,7 @@ CreditCardForm.render = function render (state) {
     h('.row', [
       h('label.small-12.columns', [
         'Card number',
-        NumberInput.render(state.number, renderStyle(NumberInput.validate(state.number, Object.keys(state.types).filter(name => state.types[name]))))
+        NumberInput.render(state.number, renderStyle(NumberInput.validate(state.number, Object.keys(state.types).filter(function (name) { return state.types[name] }))))
       ])
     ]),
     h('.row', [
@@ -58,7 +58,7 @@ CreditCardForm.render = function render (state) {
     h('.row.small-12.columns', renderTypeControls(state)),
     h('.row.small-12.columns', [
       h('.callout', json.render({
-        types: Object.keys(state.types).filter(type => state.types[type]),
+        types: Object.keys(state.types).filter(function (type) { state.types[type] }),
         number: {
           value: state.number.value,
           type: {
@@ -84,7 +84,7 @@ CreditCardForm.render = function render (state) {
 function renderTypeControls (state) {
   return h('fieldset.fieldset', [
     h('legend', 'Allowed card types'),
-    Object.keys(state.types).map((type, index) => {
+    Object.keys(state.types).map(function (type, index) {
       var id = 'card-type-' + index
       var checked = state.types[type]
       return h('.medium-6.columns', [
@@ -106,9 +106,9 @@ function renderTypeControls (state) {
 
 function Types (types) {
   var data = Object.keys(types.types)
-    .map(type => types.types[type])
-    .filter(type => type instanceof types.Type)
-    .reduce((acc, type) => {
+    .map(function (type) { return types.types[type] })
+    .filter(function (type) { return type instanceof types.Type })
+    .reduce(function (acc, type) {
       acc[type.name] = Observ(true)
       return acc
     }, {})
