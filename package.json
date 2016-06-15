@@ -12,7 +12,8 @@
   },
   "scripts": {
     "test": "standard && covert *.js",
-    "start": "degree"
+    "start": "degree",
+    "example": "npm start ./example"
   },
   "keywords": [
     "credit",
