@@ -65,7 +65,7 @@ CreditCardForm.render = function render (state) {
             eager: card.type(state.number.value, true) || null,
             strict: card.type(state.number.value) || null
           },
-          valid: NumberInput.validate(state.number)
+          valid: NumberInput.validate(state.number, Object.keys(state.types).filter(function (type) { return state.types[type] }))
         },
         expiration: {
           raw: state.expiration.raw,
