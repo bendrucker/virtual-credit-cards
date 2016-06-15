@@ -1,7 +1,7 @@
 {
   "name": "virtual-credit-cards",
   "main": "index.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Credit card form components built with virtual-dom",
   "license": "MIT",
   "repository": "bendrucker/virtual-credit-cards",
