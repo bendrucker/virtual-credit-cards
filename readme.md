@@ -9,6 +9,13 @@
 $ npm install --save virtual-credit-cards
 ```
 
+## Demo
+
+```sh
+$ npm run example
+```
+
+An example form (*example.js*) will open up in your default browser with all three components connected.
 
 ## Usage
 
