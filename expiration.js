@@ -15,6 +15,7 @@ var expiration = require('creditcards/expiration')
 var MM_YY = /^\D*(\d{1,2})(\D+)?(\d{1,4})?/
 // Specific name helps autofill kick in
 var NAME = 'cc-exp'
+var SEPARATOR = ' / '
 
 module.exports = ExpirationInput
 
@@ -52,8 +53,9 @@ ExpirationInput.render = function render (state, options) {
     name: NAME,
     autofill: NAME,
     type: 'text',
-    placeholder: 'MM / YY',
+    placeholder: 'MM' + SEPARATOR + 'YY',
     pattern: numeric,
+    maxLength: 2 + SEPARATOR.length + 4,
     value: format(state.value) || reformat(state.raw),
     'ev-event': changeEvent(state.channels.change)
   }, options))
@@ -66,7 +68,7 @@ function parse (raw) {
   var rawMonth = parts[1]
   var rawYear = parts[3]
 
-  if (!rawYear || rawYear.length < 2) return null
+  if (!rawYear || rawYear.length % 2) return null
 
   return {
     month: expiration.month.parse(rawMonth),
@@ -76,7 +78,13 @@ function parse (raw) {
 
 function format (expiration) {
   if (!expiration) return
-  return [pad(expiration.month), String(expiration.year).substring(2, 4)].join(' / ')
+  return [
+    pad(expiration.month),
+    expiration.year >= 2000 && expiration.year <= 2100
+      ? String(expiration.year).substring(2)
+      : expiration.year
+  ]
+  .join(SEPARATOR)
 }
 
 function reformat (raw) {
@@ -89,12 +97,12 @@ function reformat (raw) {
   var year = parts[3] || ''
 
   if (year.length > 0) {
-    separator = ' / '
+    separator = SEPARATOR
   } else if (separator === ' /') {
     month = month.substring(0, 1)
     separator = ''
   } else if (month.length === 2 || separator) {
-    separator = ' / '
+    separator = SEPARATOR
   } else if (month.length === 1 && month !== '0' && month !== '1') {
     month = '0' + month
     separator = ' / '

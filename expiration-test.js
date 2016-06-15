@@ -4,6 +4,7 @@ var test = require('tape')
 var thermometer = require('thermometer')
 var dispatch = require('dispatch-event')
 var createElement = require('virtual-dom/create-element')
+var raf = require('raf')
 var Expiration = require('./expiration')
 
 test('expiration', function (t) {
@@ -15,6 +16,7 @@ test('expiration', function (t) {
     assertFormatted('1', '1')
     assertFormatted('2', '02 / ')
     assertFormatted('12 /', '1')
+    assertFormatted('12 / 1', '12 / 1')
 
     assertFormatted({month: 2, year: 2020}, '02 / 20')
 
@@ -30,7 +32,7 @@ test('expiration', function (t) {
   })
 
   t.test('dom to state', function (t) {
-    t.plan(5)
+    t.plan(9)
     var render = thermometer.createComponent(Expiration)
 
     render(function (state, element, done) {
@@ -48,6 +50,23 @@ test('expiration', function (t) {
       element.value = '01 / 2'
       dispatch(element, 'input')
       t.equal(state.value(), null, 'requires minimum 2 digit year')
+
+      element.value = '01 / 201'
+      dispatch(element, 'input')
+      t.equal(state.value(), null, 'resets value while typing 4 digit year')
+
+      element.value = '01 / 2018'
+      dispatch(element, 'input')
+      t.deepEqual(state.value(), {month: 1, year: 2018})
+      raf(function () {
+        t.equal(element.value, '01 / 18', 'reformats MM/YYYY to MM/YY')
+
+        element.value = '01 / 1500'
+        dispatch(element, 'input')
+        raf(function () {
+          t.equal(element.value, '01 / 1500', 'does not truncate non-2000 dates')
+        })
+      })
     })
   })
 
