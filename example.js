@@ -51,7 +51,7 @@ CreditCardForm.render = function render (state) {
         ExpirationInput.render(state.expiration, renderStyle(ExpirationInput.validate(state.expiration)))
       ]),
       h('label.small-6.columns', [
-        'Expiration',
+        'CVC',
         CvcInput.render(state.cvc, renderStyle(CvcInput.validate(state.cvc, card.type(state.number.value))))
       ])
     ]),
