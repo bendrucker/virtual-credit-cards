@@ -20,7 +20,8 @@ function CardNumberInput (data) {
   data = data || {}
 
   return State({
-    value: Observ(data.value || ''),
+    raw: Observ(data.raw || ''),
+    value: Observ(data.value || null),
     channels: {
       change: change
     }
@@ -28,11 +29,25 @@ function CardNumberInput (data) {
 }
 
 function change (state, data) {
-  pipe(card.parse, state.value.set)(data[NAME])
+  var value = data[NAME]
+
+  // Truncates invalid card patterns
+  var reformat = pipe(card.parse, card.format, card.parse)
+  var number = value ? reformat(value) : ''
+
+  state.set({
+    raw: number,
+    value: parse(number)
+  })
+}
+
+function parse (number) {
+  return number && card.type(number) ? number : null
 }
 
 CardNumberInput.validate = function validate (state, types) {
   var number = value(state.value)
+  if (!number) return
   types = types || []
   if (!types.length) return card.isValid(number)
   return types.some(partial(card.isValid, number))
@@ -45,7 +60,7 @@ CardNumberInput.render = function render (state, options) {
     type: 'text',
     placeholder: 'Card number',
     pattern: numeric,
-    value: card.format(state.value),
+    value: card.format(state.value || card.parse(state.raw)),
     'ev-event': changeEvent(state.channels.change)
   }, options))
 }

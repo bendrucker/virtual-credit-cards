@@ -60,9 +60,10 @@ CreditCardForm.render = function render (state) {
       h('.callout', json.render({
         types: Object.keys(state.types).filter(function (type) { return state.types[type] }),
         number: {
+          raw: state.number.raw,
           value: state.number.value,
           type: {
-            eager: card.type(state.number.value, true) || null,
+            eager: card.type(state.number.raw, true) || null,
             strict: card.type(state.number.value) || null
           },
           valid: NumberInput.validate(state.number, Object.keys(state.types).filter(function (type) { return state.types[type] }))

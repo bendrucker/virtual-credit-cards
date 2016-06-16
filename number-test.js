@@ -20,15 +20,26 @@ test('expiration', function (t) {
   })
 
   t.test('dom to state', function (t) {
-    t.plan(2)
+    t.plan(7)
     var render = thermometer.createComponent(NumberInput)
 
     render(function (state, element, done) {
-      t.equal(state.value(), '', 'initial value is empty')
+      t.equal(state.raw(), '', 'initial value is empty')
 
       element.value = '4022a'
       dispatch(element, 'input')
-      t.equal(state.value(), '4022', 'stores numeric input')
+      t.equal(state.raw(), '4022', 'stores numeric input')
+      t.equal(state.value(), null, 'value is null until valid')
+
+      element.value = '5115 0000 0000 1234'
+      dispatch(element, 'input')
+      t.equal(state.raw(), '5115000000001234')
+      t.equal(state.value(), '5115000000001234', 'value is defined when valid')
+
+      element.value = '5115 0000 0000 12340'
+      dispatch(element, 'input')
+      t.equal(state.raw(), '5115000000001234', 'prevents overtyping into raw')
+      t.equal(state.value(), '5115000000001234', 'prevents overtyping into value')
     })
   })
 
