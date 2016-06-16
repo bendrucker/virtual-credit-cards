@@ -34,6 +34,7 @@
     "insert-styles": "~1.2.1",
     "json-markup": "~0.1.7",
     "observ-array": "~3.2.1",
+    "proxyquire": "~1.7.9",
     "raf": "~2.0.4",
     "standard": "^7.0.0",
     "tape": "^4.0.0",
