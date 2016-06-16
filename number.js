@@ -12,6 +12,7 @@ var extend = require('xtend')
 var numeric = require('numeric-pattern')
 var card = require('creditcards/card')
 
+var TYPE = require('./type')
 var NAME = 'cc-number'
 
 module.exports = CardNumberInput
@@ -57,7 +58,7 @@ CardNumberInput.render = function render (state, options) {
   return h('input', extend({
     name: NAME,
     autocomplete: NAME,
-    type: 'text',
+    type: TYPE,
     placeholder: 'Card number',
     pattern: numeric,
     value: card.format(state.value || card.parse(state.raw)),

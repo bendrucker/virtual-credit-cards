@@ -12,6 +12,7 @@ var numeric = require('numeric-pattern')
 var card = require('creditcards/card')
 var cvc = require('creditcards/cvc')
 
+var TYPE = require('./type')
 var NAME = 'cc-csc'
 
 module.exports = CardNumberInput
@@ -40,7 +41,7 @@ CardNumberInput.render = function render (state, options) {
   return h('input', extend({
     name: NAME,
     autocomplete: NAME,
-    type: 'text',
+    type: TYPE,
     placeholder: 'CVC',
     pattern: numeric,
     maxLength: 4,

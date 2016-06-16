@@ -11,6 +11,7 @@ var numeric = require('numeric-pattern')
 var changeEvent = require('value-event/change')
 var expiration = require('creditcards/expiration')
 
+var TYPE = require('./type')
 // MM / YY
 var MM_YY = /^\D*(\d{1,2})(\D+)?(\d{1,4})?/
 // Specific name helps autofill kick in
@@ -52,7 +53,7 @@ ExpirationInput.render = function render (state, options) {
   return h('input', extend({
     name: NAME,
     autofill: NAME,
-    type: 'text',
+    type: TYPE,
     placeholder: 'MM' + SEPARATOR + 'YY',
     pattern: numeric,
     maxLength: 2 + SEPARATOR.length + 4,

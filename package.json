@@ -45,6 +45,7 @@
     "number.js",
     "expiration.js",
     "cvc.js",
+    "type.js",
     "*-test.js",
     "example.js"
   ],
@@ -52,6 +53,7 @@
     "ap": "~0.2.0",
     "creditcards": "~2.1.2",
     "dover": "^1.2.0",
+    "is-android": "~1.0.1",
     "numeric-pattern": "~1.0.0",
     "observ": "~0.2.0",
     "observ-value": "~1.0.0",
