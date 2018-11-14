@@ -85,7 +85,7 @@ function format (expiration) {
       ? String(expiration.year).substring(2)
       : expiration.year
   ]
-  .join(SEPARATOR)
+    .join(SEPARATOR)
 }
 
 function reformat (raw) {

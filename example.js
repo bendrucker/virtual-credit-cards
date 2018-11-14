@@ -4,8 +4,8 @@ var State = require('dover')
 var Observ = require('observ')
 var h = require('virtual-dom/h')
 var changeEvent = require('value-event/change')
-var types = require('creditcards/types')
-var card = require('creditcards/card')
+var types = require('creditcards-types')
+var card = require('creditcards').card
 
 var NumberInput = require('./number')
 var ExpirationInput = require('./expiration')
@@ -99,16 +99,14 @@ function renderTypeControls (state) {
             value: !checked
           })
         }),
-        h('label', {attributes: {for: id}}, type)
+        h('label', { attributes: { for: id } }, type)
       ])
     })
   ])
 }
 
 function Types (types) {
-  var data = Object.keys(types.types)
-    .map(function (type) { return types.types[type] })
-    .filter(function (type) { return type instanceof types.Type })
+  var data = types
     .reduce(function (acc, type) {
       acc[type.name] = Observ(true)
       return acc
