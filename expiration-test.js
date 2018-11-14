@@ -18,7 +18,7 @@ test('expiration', function (t) {
     assertFormatted('12 /', '1')
     assertFormatted('12 / 1', '12 / 1')
 
-    assertFormatted({month: 2, year: 2020}, '02 / 20')
+    assertFormatted({ month: 2, year: 2020 }, '02 / 20')
 
     t.end()
 
@@ -41,7 +41,7 @@ test('expiration', function (t) {
       element.value = '01 / 20'
       dispatch(element, 'input')
       t.equal(state.raw(), '01 / 20', 'stores input value as raw')
-      t.deepEqual(state.value(), {month: 1, year: 2020}, 'stores parsed exp as value')
+      t.deepEqual(state.value(), { month: 1, year: 2020 }, 'stores parsed exp as value')
 
       element.value = ''
       dispatch(element, 'input')
@@ -57,7 +57,7 @@ test('expiration', function (t) {
 
       element.value = '01 / 2018'
       dispatch(element, 'input')
-      t.deepEqual(state.value(), {month: 1, year: 2018})
+      t.deepEqual(state.value(), { month: 1, year: 2018 })
       raf(function () {
         t.equal(element.value, '01 / 18', 'reformats MM/YYYY to MM/YY')
 

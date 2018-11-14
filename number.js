@@ -4,13 +4,12 @@ var State = require('dover')
 var Observ = require('observ')
 var value = require('observ-value')
 var pipe = require('value-pipe')
-var partial = require('ap').partial
 
 var h = require('virtual-dom/h')
 var changeEvent = require('value-event/change')
 var extend = require('xtend')
 var numeric = require('numeric-pattern')
-var card = require('creditcards/card')
+var card = require('creditcards').card
 
 var TYPE = require('./type')
 var NAME = 'cc-number'
@@ -51,7 +50,7 @@ CardNumberInput.validate = function validate (state, types) {
   if (!number) return
   types = types || []
   if (!types.length) return card.isValid(number)
-  return types.some(partial(card.isValid, number))
+  return types.some(type => card.isValid(number, type))
 }
 
 CardNumberInput.render = function render (state, options) {

@@ -29,7 +29,7 @@ test('full example', function (t) {
     t.equal(cvcInput.style.borderColor, 'red', 'cc cvc initially invalid')
 
     state.number.value.set(['4242', '4242', '4242', '4242'].join(''))
-    state.expiration.value.set({month: 10, year: 2050})
+    state.expiration.value.set({ month: 10, year: 2050 })
     state.cvc.value.set('123')
 
     raf(function () {

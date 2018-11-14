@@ -9,8 +9,8 @@ var h = require('virtual-dom/h')
 var changeEvent = require('value-event/change')
 var extend = require('xtend')
 var numeric = require('numeric-pattern')
-var card = require('creditcards/card')
-var cvc = require('creditcards/cvc')
+var card = require('creditcards').card
+var cvc = require('creditcards').cvc
 
 var TYPE = require('./type')
 var NAME = 'cc-csc'
